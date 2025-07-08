@@ -6,28 +6,34 @@ function CoinsTable() {
     const coinsTable = useCoinsTable()
 
     return(
-        <div className="w-full text-[var(--black)] dark:text-[var(--white)]">
-            <table className="w-full border-collapse border-2 border-[var(--black)] dark:border-[var(--white)]">
-                <thead>
-                    <tr className="border-1">
-                        <th className="w-[20%] p-2 text-2xl font-bold">Image</th>
-                        <th className="w-[20%] p-2 text-2xl font-bold">Name</th>
-                        <th className="w-[20%] p-2 text-2xl font-bold">Current Price</th>
-                        <th className="w-[20%] p-2 text-2xl font-bold">Market Cap</th>
-                        <th className="w-[20%] p-2 text-2xl font-bold">Total Supply</th>
+        <div className="w-full text-[var(--black)] dark:text-[var(--white)] py-20 px-50">
+            <table className="w-full rounded-2xl">
+                <thead className="bg-amber-500 rounded-2xl">
+                    <tr>
+                        <th className="w-[30%] p-2 text-2xl font-bold">Coin</th>
+                        <th className="w-[25%] p-2 text-2xl font-bold">Current Price</th>
+                        <th className="w-[20%] p-2 text-2xl font-bold">24H change</th>
+                        <th className="w-[25%] p-2 text-2xl font-bold">Market Cap</th>
                     </tr>
                 </thead>
-                <tbody className="border-1">
+                <tbody>
                     {coinsTable?.map((data) => {
                         return(
-                            <tr className="border-1" key={data.id}>
-                                <td className="w-[20%] text-center p-2">
-                                    <img src={data.image} alt={data.name} className="h-[70%] w-[70%] inline-block" />
+                            <tr key={data.id}>
+                                <td className="flex items-center w-[30%] text-center p-2 gap-10">
+                                    <img
+                                        src={data.image}
+                                        alt={data.name}
+                                        className="w-[150px] h-[150px] object-contain"
+                                    />
+                                    <div className="flex flex-col items-start justify-center">
+                                        <div className="font-bold text-2xl whitespace-nowrap">{data.name}</div>
+                                        <div className="text-xl">{data.symbol}</div>
+                                    </div>
                                 </td>
-                                <td className="w-[20%] p-1 text-xl text-center">{data.name}</td>
-                                <td className="w-[20%] p-1 text-xl text-center">{data.current_price?.toLocaleString()}</td>
-                                <td className="w-[20%] p-1 text-xl text-center">{data.market_cap?.toLocaleString()}</td>
-                                <td className="w-[20%] p-1 text-xl text-center">{data.total_supply?.toLocaleString()}</td>
+                                <td className="w-[25%] p-1 text-xl text-center">{data.current_price?.toLocaleString()}</td>
+                                <td className="w-[20%] p-1 text-xl text-center">{data.price_change_24h?.toLocaleString()}</td>
+                                <td className="w-[25%] p-1 text-xl text-end">{data.market_cap?.toLocaleString()}</td>
                             </tr>
                         )
                     })}

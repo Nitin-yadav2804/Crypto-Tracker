@@ -40,7 +40,7 @@ function Home() {
                             />}
                 </div>
                 <CoinsTable />
-                <div className="flex justify-between items-center w-[100%] p-3">
+                <div className="flex justify-between items-center w-[100%] pb-10 px-50">
                   <button className="w-[150px] h-[50px] text-[var(--black)] bg-amber-500 text-2xl rounded-2xl font-bold">
                     Previous
                   </button>
