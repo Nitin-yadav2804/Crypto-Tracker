@@ -51,14 +51,28 @@ function CoinsTable() {
             <div className="flex justify-between items-center w-[100%]">
                 <button 
                     className="w-[150px] h-[50px] text-[var(--black)] bg-amber-500 text-2xl rounded-2xl font-bold cursor-pointer"
-                    onClick={() => setPage(page-1)}
+                    onClick={() => {
+                        setPage(page-1)
+                        window.scrollTo({
+                            top: 100,
+                            left: 100,
+                            behavior: "smooth",
+                        });
+                    }}
                     disabled={page===1}
                 >
                     Previous
                 </button>
                 <button 
                     className="w-[150px] h-[50px] text-[var(--black)] bg-amber-500 text-2xl rounded-2xl font-bold cursor-pointer"
-                    onClick={() => setPage(page+1)}
+                    onClick={() => {
+                        setPage(page+1)
+                        window.scrollTo({
+                            top: 100,
+                            left: 100,
+                            behavior: "smooth",
+                        });
+                    }}
                 >
                     Next
                 </button>
