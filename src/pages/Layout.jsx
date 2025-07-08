@@ -9,8 +9,6 @@ function MainLayout(){
   const [currency, setCurrency] = useState("USD");
 
   const changeCurrency = (curr) => {
-    console.log("Currency changed to: ", curr);
-    
     setCurrency(curr)
   };
     return(

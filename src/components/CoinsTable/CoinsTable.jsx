@@ -9,8 +9,15 @@ function CoinsTable() {
     const { currency } = useCurrency()
     const [page, setPage] = useState(1)
 
-    const coinsTable = useCoinsTable(page, currency)
+    const {data: coinsTable, loading} = useCoinsTable(page, currency)
 
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (coinsTable.length === 0) {
+        return <div>No data available</div>
+    }
     return(
         <div className="w-full text-[var(--black)] dark:text-[var(--white)] py-20 px-30">
             <table className="w-full rounded-2xl">
