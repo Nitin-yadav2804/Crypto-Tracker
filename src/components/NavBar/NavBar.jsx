@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useCurrency from "../../contexts/currency";
 import useTheme from "../../contexts/theme";
 
@@ -44,9 +45,11 @@ function NavBar() {
           </ul>
         </div>
       </div>
-      <div className="navbar-center">
-        <a className="btn btn-neutral border-none rounded-2xl hover:bg-[var(--black)]/20 dark:hover:bg-[var(--white)]/20 text-xl text-[var(--black)] dark:text-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)]">Crypto Tracker</a>
-      </div>
+      <Link to={'/'}>
+        <div className="navbar-center">
+          <a className="btn btn-neutral border-none rounded-2xl hover:bg-[var(--black)]/20 dark:hover:bg-[var(--white)]/20 text-xl text-[var(--black)] dark:text-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)]">Crypto Tracker</a>
+        </div>
+      </Link>
       <div className="navbar-end text-[var(--black)] dark:text-[var(--white)] ">
         <label className="swap swap-rotate scale-80">
           {/* this hidden checkbox controls the state */}
