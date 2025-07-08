@@ -1,8 +1,10 @@
+import useCurrency from "../../contexts/currency";
 import useTheme from "../../contexts/theme";
 
 function NavBar() {
 
     const { changeTheme } = useTheme()
+    const { changeCurrency } = useCurrency()
 
   return (
     <div className="navbar shadow-sm bg-[var(--white)] dark:bg-[var(--black)] border-b-1 border-[var(--black)] dark:border-[var(--white)]">
@@ -29,11 +31,15 @@ function NavBar() {
             tabIndex={0}
             className="menu menu-sm dropdown-content text-[var(--black)] dark:text-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)] rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>USD</a>
+            <li
+              onClick={() => changeCurrency('USD')}
+            >
+              <a href="#">USD</a>
             </li>
-            <li>
-              <a>INR</a>
+            <li
+              onClick={() => changeCurrency('INR')}
+            >
+              <a href="#">INR</a>
             </li>
           </ul>
         </div>

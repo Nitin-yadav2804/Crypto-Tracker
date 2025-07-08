@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css'
 import Home from './pages/Home'
 import { ThemeProvider } from './contexts/theme';
+import Routing from './components/Routing/Routing';
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <ThemeProvider value={{isDark, changeTheme}}>
-      <Home />
+      <Routing />
     </ThemeProvider>
   )
 }
