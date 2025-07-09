@@ -1,19 +1,30 @@
 import { useLocation } from "react-router-dom";
 import useCoinDetails from "../hooks/useCoinDetails";
+import ContentLoader, { Facebook } from 'react-content-loader'
+import useTheme from "../contexts/theme";
 
 
 function CoinDetails() {
+
+    const { isDark } = useTheme()
 
     const { state } = useLocation()
     const coinId = state?.coinId
 
     const { data: coinData, loading } = useCoinDetails( coinId )
 
+    const MyFacebookLoader = () => <Facebook />
+    const MyFacebookLoaderDarkMode = () => <Facebook 
+                                        backgroundColor="#000000"
+                                    />
+
     if (loading) {
         return (
             <div className="flex gap-2 items-center justify-center mt-20 text-[var(--black)] dark:text-[var(--white)]">
-                <span className="loading loading-spinner loading-xl"></span>
-                <div>Loading</div>
+                {isDark?    MyFacebookLoader()
+                        :
+                            MyFacebookLoaderDarkMode()
+                }
             </div>
         )
     }
@@ -36,7 +47,7 @@ function CoinDetails() {
                     <p className="">{coinData.description.en}</p>
                 </div>
             </div>
-            <div></div>
+            <div>CoinInformation</div>
         </div>
     )
 }
