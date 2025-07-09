@@ -1,4 +1,4 @@
-import { Facebook } from "react-content-loader"
+import { Code } from "react-content-loader"
 import useTheme from "../../contexts/theme"
 
 
@@ -6,10 +6,10 @@ function PageLoader() {
 
     const { isDark } = useTheme()
 
-    const MyFacebookLoader = () => <Facebook
+    const MyFacebookLoader = () => <Code
                                         backgroundColor="#F2EFE9"
                                     />
-    const MyFacebookLoaderDarkMode = () => <Facebook 
+    const MyFacebookLoaderDarkMode = () => <Code 
                                         backgroundColor="#110726"
                                     />
 
