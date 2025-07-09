@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useCoinDetails from "../hooks/useCoinDetails";
 import { Facebook } from 'react-content-loader'
 import useTheme from "../contexts/theme";
@@ -10,9 +10,8 @@ function CoinDetails() {
     const { isDark } = useTheme()
     const { currency } = useCurrency()
 
-    const { state } = useLocation()
-    const coinId = state?.coinId
-    
+    const coin = useParams()
+    const coinId = coin.coinId
     
 
     const { data: coinData, loading } = useCoinDetails( coinId )
