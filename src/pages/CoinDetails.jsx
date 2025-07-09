@@ -1,15 +1,19 @@
 import { useLocation } from "react-router-dom";
 import useCoinDetails from "../hooks/useCoinDetails";
-import ContentLoader, { Facebook } from 'react-content-loader'
+import { Facebook } from 'react-content-loader'
 import useTheme from "../contexts/theme";
+import useCurrency from "../contexts/currency"
 
 
 function CoinDetails() {
 
     const { isDark } = useTheme()
+    const { currency } = useCurrency()
 
     const { state } = useLocation()
     const coinId = state?.coinId
+    
+    
 
     const { data: coinData, loading } = useCoinDetails( coinId )
 
@@ -45,6 +49,10 @@ function CoinDetails() {
                 </div>
                 <div className="w-full p-5">
                     <p className="">{coinData.description.en}</p>
+                </div>
+                <div className="flex justify-between p-5">
+                    <div className="text-2xl"><span className=" font-bold">Rank: </span>{coinData.market_cap_rank}</div>
+                    <div className="text-2xl"><span className=" font-bold text-amber-600">Current Price: </span>{coinData.market_data.current_price[`${currency.toLowerCase()}`]}</div>
                 </div>
             </div>
             <div>CoinInformation</div>
