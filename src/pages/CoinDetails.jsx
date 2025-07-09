@@ -1,44 +1,51 @@
 import { useParams } from "react-router-dom";
 import useCoinDetails from "../hooks/useCoinDetails";
-import { Facebook } from 'react-content-loader'
-import useTheme from "../contexts/theme";
 import useCurrency from "../contexts/currency"
+import CoinInfo from "../components/CoinInfo/CoinInfo";
+import Alerts from "../components/Alerts/Alerts";
+import PageLoader from "../components/PageLoader/PageLoader";
 
 
 function CoinDetails() {
 
-    const { isDark } = useTheme()
     const { currency } = useCurrency()
 
     const coin = useParams()
     const coinId = coin.coinId
-    
 
-    const { data: coinData, loading } = useCoinDetails( coinId )
-
-    const MyFacebookLoader = () => <Facebook />
-    const MyFacebookLoaderDarkMode = () => <Facebook 
-                                        backgroundColor="#000000"
-                                    />
+    const { data: coinData, loading, error } = useCoinDetails( coinId )
 
     if (loading) {
         return (
-            <div className="flex gap-2 items-center justify-center mt-20 text-[var(--black)] dark:text-[var(--white)]">
-                {isDark?    MyFacebookLoader()
-                        :
-                            MyFacebookLoaderDarkMode()
-                }
+            <PageLoader />
+        )
+    }
+
+    if(error) {
+        return(
+            <div className="mt-20">
+                <Alerts 
+                    message={'Something Went Wrong'}
+                    type={'error'}
+                />
             </div>
         )
     }
 
     if (coinData.length === 0) {
-        return <div className="text-[var(--black)] dark:text-[var(--white)]">No data available</div>
+        return(
+            <div className="mt-20">
+                <Alerts 
+                    message={'No Data Available'}
+                    type={'info'}
+                />
+            </div>
+        )    
     }
 
     return(
         <div className="flex bg-[var(--white)] dark:bg-[var(--black)] text-[var(--black)] dark:text-[var(--white)] p-10">
-            <div className="w-full h-full basis-2/5 border-r-4 border-[var(--black)] dark:border-[var(--white)] pr-[40px]">
+            <div className="w-full h-full basis-2/5 border-r-2 border-[var(--black)] dark:border-[var(--white)] pr-[40px]">
                 <div className="w-full flex justify-center">
                     <img src={coinData.image.large} alt={coinData.name} className="w-[300px] h-[300px] "/>
                 </div>
@@ -54,7 +61,9 @@ function CoinDetails() {
                     <div className="text-2xl"><span className=" font-bold text-amber-600">Current Price: </span>{coinData.market_data.current_price[`${currency.toLowerCase()}`]}</div>
                 </div>
             </div>
-            <div>CoinInformation</div>
+            <div className="w-full basis-3/5 pl-[40px]">
+                <CoinInfo />
+            </div>
         </div>
     )
 }

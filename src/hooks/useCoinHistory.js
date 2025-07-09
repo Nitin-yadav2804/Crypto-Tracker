@@ -1,17 +1,21 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import useCurrency from "../contexts/currency"
 
-function useCoinsTable( page = 1, currency = 'usd') {
+function useCoinHistory( coinId , days = 1 ) {
     
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
-    const perPage = 20
+    const { currency } = useCurrency()
+
+    const[interval, setInterval] = useState('daily')
 
     useEffect(() => {
-        async function fetchCoinsTable() {
-            const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&per_page=${perPage}&page=${page}`
+        if(days == 1) setInterval('')
+        async function fetchCoinHistory() {
+            const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency}&days=${days}&interval=${interval}`
                 // eslint-disable-next-line no-unused-vars
                 const response = await axios.get(url)
                     .then(response => {
@@ -24,10 +28,10 @@ function useCoinsTable( page = 1, currency = 'usd') {
                     })
                     .finally(() => setLoading(false));
         }
-        fetchCoinsTable()
-    }, [currency,page])
+        fetchCoinHistory()
+    }, [coinId, currency, days,interval])
 
     return { data, loading, error }
 }
 
-export default useCoinsTable
+export default useCoinHistory

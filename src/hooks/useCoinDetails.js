@@ -2,8 +2,10 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 
 function useCoinDetails( coinId ) {
+    
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         async function fetchCoinDetails() {
@@ -13,16 +15,17 @@ function useCoinDetails( coinId ) {
                     .then(response => {
                         setData(response.data)
                     })
+                    // eslint-disable-next-line no-unused-vars
                     .catch(error => {
                         setData([])
-                        console.error("Error fetching coins data:", error);
+                        setError(true)
                     })
                     .finally(() => setLoading(false));
         }
         fetchCoinDetails()
     }, [coinId])
 
-    return { data, loading }
+    return { data, loading, error }
 }
 
 export default useCoinDetails

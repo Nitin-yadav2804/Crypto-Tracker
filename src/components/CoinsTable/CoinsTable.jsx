@@ -2,6 +2,8 @@ import { useState } from "react"
 import useCoinsTable from "../../hooks/useCoinsTable"
 import useCurrency from "../../contexts/currency"
 import { Link } from "react-router-dom"
+import Alerts from "../Alerts/Alerts"
+import PageLoader from "../PageLoader/PageLoader"
 
 
 function CoinsTable() {
@@ -9,19 +11,34 @@ function CoinsTable() {
     const { currency } = useCurrency()
     const [page, setPage] = useState(1)
 
-    const {data: coinsTable, loading} = useCoinsTable(page, currency)
+    const {data: coinsTable, loading, error} = useCoinsTable(page, currency)
 
     if (loading) {
         return (
-            <div className="flex gap-2 items-center justify-center mt-20 text-[var(--black)] dark:text-[var(--white)]">
-                <span className="loading loading-spinner loading-xl"></span>
-                <div>Loading</div>
+            <PageLoader />
+        )
+    }
+
+    if(error) {
+        return(
+            <div className="mt-20">
+                <Alerts 
+                    message={'Something Went Wrong'}
+                    type={'error'}
+                />
             </div>
         )
     }
 
     if (coinsTable.length === 0) {
-        return <div className="text-[var(--black)] dark:text-[var(--white)]">No data available</div>
+        return(
+            <div className="mt-20">
+                <Alerts 
+                    message={'No Data Available'}
+                    type={'info'}
+                />
+            </div>
+        )
     }
     return(
         <div className="w-full text-[var(--black)] dark:text-[var(--white)] py-20 px-30">
