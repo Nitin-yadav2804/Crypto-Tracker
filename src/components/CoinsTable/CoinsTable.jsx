@@ -46,7 +46,7 @@ function CoinsTable() {
                                             className="w-[150px] h-[150px] object-contain"
                                         />
                                         <div className="flex flex-col items-start justify-center">
-                                            <div className="font-bold text-2xl">{data.name}</div>
+                                            <div className="text-start font-bold text-2xl">{data.name}</div>
                                             <div className="text-xl">{data.symbol}</div>
                                         </div>
                                     </td>
