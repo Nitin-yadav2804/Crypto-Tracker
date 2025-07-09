@@ -30,17 +30,19 @@ function NavBar() {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content text-[var(--black)] dark:text-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)] rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content text-[var(--black)] dark:text-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)] rounded-box z-1 mt-3 p-2 shadow"
           >
             <li
+              className="font-semibold "
               onClick={() => changeCurrency('USD')}
             >
-              <a href="#">USD</a>
+              <a href="#" className="text-[15px]">USD</a>
             </li>
             <li
+              className="font-semibold"
               onClick={() => changeCurrency('INR')}
             >
-              <a href="#">INR</a>
+              <a href="#" className="text-[15px]">INR</a>
             </li>
           </ul>
         </div>
