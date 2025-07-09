@@ -10,6 +10,7 @@ function useCoinsTable( page = 1, currency = 'usd') {
     useEffect(() => {
         async function fetchCoinsTable() {
             const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&per_page=${perPage}&page=${page}`
+                // eslint-disable-next-line no-unused-vars
                 const response = await axios.get(url)
                     .then(response => {
                         setData(response.data)

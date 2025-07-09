@@ -12,11 +12,16 @@ function CoinsTable() {
     const {data: coinsTable, loading} = useCoinsTable(page, currency)
 
     if (loading) {
-        return <div>Loading...</div>
+        return (
+            <div className="flex gap-2 items-center justify-center mt-20 text-[var(--black)] dark:text-[var(--white)]">
+                <span className="loading loading-spinner loading-xl"></span>
+                <div>Loading</div>
+            </div>
+        )
     }
 
     if (coinsTable.length === 0) {
-        return <div>No data available</div>
+        return <div className="text-[var(--black)] dark:text-[var(--white)]">No data available</div>
     }
     return(
         <div className="w-full text-[var(--black)] dark:text-[var(--white)] py-20 px-30">
@@ -33,7 +38,7 @@ function CoinsTable() {
                     {coinsTable?.map((data) => {
                         return(
                             <tr key={data.id}>
-                                <Link to={`/details/${data.id}`}>
+                                <Link state={{ coinId: `${data.id}` }} to={`/details/${data.id}`}>
                                     <td className="flex items-center w-[30%] text-center p-2 gap-10">
                                         <img
                                             src={data.image}
