@@ -62,6 +62,11 @@ function CoinInfo() {
                 className="text-[var(--black)] dark:text-[var(--white)]"
                 options={{
                     responsive: true,
+                    datasets: {
+                        line: {
+                            fill: true,
+                        }
+                    },
                     scales: {
                         x: {
                             grid: {
@@ -109,6 +114,64 @@ function CoinInfo() {
                     ],
                 }}
             />
+            <Line 
+                className="text-[var(--black)] dark:text-[var(--white)] mt-10"
+                options={{
+                    responsive: true,
+                    datasets: {
+                        line: {
+                            fill: true,
+                            borderColor: 'rgb(235, 69, 104)',
+                            backgroundColor: 'rgba(235, 69, 104, 0.3)',
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: `${gridColor}`,
+                            },
+                            ticks: {
+                                color: `${color}`,
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: `${gridColor}`,
+                            },  
+                            ticks: {
+                                color: `${color}`,
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: `${color}`,
+                                font: {
+                                    size: 15,
+                                }
+                            }
+                        }
+                    }
+                }}
+                data={{
+                    labels: coinInfo.market_caps.map((cap) => {
+                        let date = new Date(cap[0])
+                        let time = (date.getHours() > 12) ? 
+                                                        `${date.getHours() - 12} : ${date.getMinutes()} PM`
+                                                    :
+                                                        `${date.getHours()} : ${date.getMinutes()} AM`
+                        return (days === 1 || days === 7) ? time : date.toLocaleDateString()
+                    }),
+                    datasets: [
+                        {
+                            label: `Market Cap past ${days} days in ${currency}`,
+                            data: coinInfo.market_caps.map((cap) => cap[1]),
+                            pointRadius: 0,
+                        },
+                    ],
+                }}
+            />
             <div className="dropdown dropdown-center">
                 <div tabIndex={0} role="button" className="btn m-1 border-none rounded-2xl w-[10rem] bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] font-bold text-[17px]">Select Interval</div>
                 <ul tabIndex={0} className="dropdown-content menu rounded-box w-52 shadow-sm bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] rounded-xl">
@@ -120,7 +183,7 @@ function CoinInfo() {
                             document.activeElement.blur()
                             window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
-                    ><a>Daily</a></li>
+                    ><a>24 Hours</a></li>
                     <li 
                         className="bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] font-bold"
                         onClick={() => {
@@ -129,7 +192,7 @@ function CoinInfo() {
                             document.activeElement.blur()
                             window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
-                    ><a>Weekly</a></li>
+                    ><a>7 Days</a></li>
                     <li 
                         className="bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] font-bold"
                         onClick={() => {
@@ -138,7 +201,16 @@ function CoinInfo() {
                             document.activeElement.blur()
                             window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
-                    ><a>Monthly</a></li>
+                    ><a>30 Days</a></li>
+                    <li 
+                        className="bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] font-bold"
+                        onClick={() => {
+                            setDays(90)
+                            setInterval('daily')
+                            document.activeElement.blur()
+                            window.scrollTo({top: 0, behavior: 'smooth'})
+                        }}
+                    ><a>90 Days</a></li>
                     <li 
                         className="bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] font-bold"
                         onClick={() => {
@@ -147,7 +219,7 @@ function CoinInfo() {
                             document.activeElement.blur()
                             window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
-                    ><a>Yearly</a></li>
+                    ><a>365 Days</a></li>
                 </ul>
             </div>
         </div>
