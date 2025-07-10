@@ -121,8 +121,6 @@ function CoinInfo() {
                     datasets: {
                         line: {
                             fill: true,
-                            borderColor: 'rgb(235, 69, 104)',
-                            backgroundColor: 'rgba(235, 69, 104, 0.3)',
                         }
                     },
                     scales: {
@@ -168,6 +166,8 @@ function CoinInfo() {
                             label: `Market Cap past ${days} days in ${currency}`,
                             data: coinInfo.market_caps.map((cap) => cap[1]),
                             pointRadius: 0,
+                            borderColor: 'rgb(235, 69, 104)',
+                            backgroundColor: 'rgba(235, 69, 104, 0.3)',
                         },
                     ],
                 }}
