@@ -13,7 +13,9 @@ function MainLayout(){
   };
     return(
         <CurrencyProvider value={{ currency, changeCurrency }}>
-            <NavBar />
+            <div className="h-[70px]">
+              <NavBar />
+            </div>
             <Outlet />
         </CurrencyProvider>
     )

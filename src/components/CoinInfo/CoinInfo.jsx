@@ -111,12 +111,14 @@ function CoinInfo() {
             />
             <div className="dropdown dropdown-center">
                 <div tabIndex={0} role="button" className="btn m-1 border-none rounded-2xl w-[10rem] bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] font-bold text-[17px]">Select Interval</div>
-                <ul tabIndex={0} className="dropdown-content menu rounded-box z-1 w-52 shadow-sm bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] rounded-xl">
+                <ul tabIndex={0} className="dropdown-content menu rounded-box w-52 shadow-sm bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] rounded-xl">
                     <li 
                         className="bg-[var(--black)] dark:bg-[var(--white)] text-[var(--white)] dark:text-[var(--black)] font-bold"
                         onClick={() => {
                             setDays(1)
                             setInterval('')
+                            document.activeElement.blur()
+                            window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
                     ><a>Daily</a></li>
                     <li 
@@ -124,6 +126,8 @@ function CoinInfo() {
                         onClick={() => {
                             setDays(7)
                             setInterval('')
+                            document.activeElement.blur()
+                            window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
                     ><a>Weekly</a></li>
                     <li 
@@ -131,6 +135,8 @@ function CoinInfo() {
                         onClick={() => {
                             setDays(30)
                             setInterval('daily')
+                            document.activeElement.blur()
+                            window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
                     ><a>Monthly</a></li>
                     <li 
@@ -138,6 +144,8 @@ function CoinInfo() {
                         onClick={() => {
                             setDays(365)
                             setInterval('daily')
+                            document.activeElement.blur()
+                            window.scrollTo({top: 0, behavior: 'smooth'})
                         }}
                     ><a>Yearly</a></li>
                 </ul>

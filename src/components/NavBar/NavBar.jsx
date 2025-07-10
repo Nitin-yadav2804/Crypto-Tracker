@@ -8,7 +8,7 @@ function NavBar() {
     const { changeCurrency } = useCurrency()
 
   return (
-    <div className="navbar shadow-sm bg-[var(--white)] dark:bg-[var(--black)] border-b-1 border-[var(--black)] dark:border-[var(--white)]">
+    <div className="navbar fixed top-0 left-0 z-50 shadow-sm bg-[var(--white)] dark:bg-[var(--black)] border-b-1 border-[var(--black)] dark:border-[var(--white)]">
       <div className="navbar-start">
         <div className="dropdown  text-[var(--black)] dark:text-[var(--white)] bg-[var(--white)] dark:bg-[var(--black)]">
           <div tabIndex={0} role="button" className="btn btn-neutral btn-circle border-none">
@@ -34,13 +34,19 @@ function NavBar() {
           >
             <li
               className="font-semibold "
-              onClick={() => changeCurrency('USD')}
+              onClick={() => {
+                  changeCurrency('USD')
+                  document.activeElement.blur()
+              }}
             >
               <a href="#" className="text-[15px]">USD</a>
             </li>
             <li
               className="font-semibold"
-              onClick={() => changeCurrency('INR')}
+              onClick={() => {
+                  changeCurrency('INR')
+                  document.activeElement.blur()
+              }}
             >
               <a href="#" className="text-[15px]">INR</a>
             </li>
